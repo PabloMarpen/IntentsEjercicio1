@@ -22,23 +22,15 @@ class MainActivity : AppCompatActivity() {
     var nombreString = ""
     var numeroInt = 0
 
-    private val startForResult = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
-
-        if (result.resultCode == Activity.RESULT_OK) {
-
-            nombreString = nombre.text.toString()
-            resultado.text = nombreString + numeroInt
-        }
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_main)
 
-             nombre = findViewById<TextView>(R.id.nombre)
-             seekBar = findViewById<SeekBar>(R.id.seekBar)
-             button = findViewById<Button>(R.id.button)
+            nombre = findViewById<TextView>(R.id.nombre)
+            seekBar = findViewById<SeekBar>(R.id.seekBar)
+            button = findViewById<Button>(R.id.button)
             seekBar.min = 0
             seekBar.max = 10
 
@@ -57,13 +49,11 @@ class MainActivity : AppCompatActivity() {
             }
         })
 
-
-
         button.setOnClickListener{
             val intent = Intent(this, DetailActivity::class.java)
-            startForResult.launch(intent)
+            intent.putExtra(nombreString, numeroInt)
+            startActivity(intent)
         }
-
 
         }
     }
