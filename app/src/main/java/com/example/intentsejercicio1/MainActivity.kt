@@ -9,6 +9,7 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import android.widget.Button
 import android.widget.CheckBox
+import android.widget.EditText
 import android.widget.SeekBar
 import android.widget.TextView
 import androidx.activity.result.contract.ActivityResultContracts
@@ -16,7 +17,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 class MainActivity : AppCompatActivity() {
 
     private lateinit var seekBar : SeekBar
-    private lateinit var nombre : TextView
+    private lateinit var nombre : EditText
     private lateinit var button : Button
     private lateinit var resultado : TextView
     var nombreString = ""
@@ -28,7 +29,7 @@ class MainActivity : AppCompatActivity() {
         enableEdgeToEdge()
         setContentView(R.layout.activity_main)
 
-            nombre = findViewById<TextView>(R.id.nombre)
+            nombre = findViewById<EditText>(R.id.nombre)
             seekBar = findViewById<SeekBar>(R.id.seekBar)
             button = findViewById<Button>(R.id.button)
             seekBar.min = 0
@@ -51,7 +52,9 @@ class MainActivity : AppCompatActivity() {
 
         button.setOnClickListener{
             val intent = Intent(this, DetailActivity::class.java)
-            intent.putExtra(nombreString, numeroInt)
+            nombreString = nombre.text.toString()
+            intent.putExtra("nombre", nombreString)
+            intent.putExtra("numero", numeroInt)
             startActivity(intent)
         }
 
