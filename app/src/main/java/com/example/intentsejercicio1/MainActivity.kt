@@ -12,6 +12,7 @@ import android.widget.CheckBox
 import android.widget.EditText
 import android.widget.SeekBar
 import android.widget.TextView
+import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 
 class MainActivity : AppCompatActivity() {
@@ -49,13 +50,20 @@ class MainActivity : AppCompatActivity() {
                 // No se necesita implementación en este caso
             }
         })
-
+        // al pulsar en boton enviar creamos un intent a la vista DetailActivity,
+        // despues añadimos las variables al intent con los nombres, "name", si
+        // todo esta correcto iniciamos la actividad con el intent, si no, un toast
         button.setOnClickListener{
             val intent = Intent(this, DetailActivity::class.java)
             nombreString = nombre.text.toString()
             intent.putExtra("nombre", nombreString)
             intent.putExtra("numero", numeroInt)
-            startActivity(intent)
+            if (nombreString == "" || numeroInt == null){
+                Toast.makeText(this, "Introduce todo", Toast.LENGTH_SHORT).show()
+            }else {
+                startActivity(intent)
+
+            }
         }
 
         }
